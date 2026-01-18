@@ -56,3 +56,14 @@ class Pokemon:
     # Метод класса для получения картинки покемона
     def show_img(self):
         return self.img
+
+class Wizard(Pokemon):
+    pass
+
+class Fighter (Pokemon):
+    def attack(self, enemy):
+        super_power = randint(5,10)
+        self.power += super_power
+        result = super().attack(enemy)
+        self.power -= super_power
+        return result + f"\nБоец применил супер-атаку силой:{super_power} "
