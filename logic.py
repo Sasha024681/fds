@@ -11,6 +11,9 @@ class Pokemon:
         self.pokemon_number = randint(1,1000)
         self.img = self.get_img()
         self.name = self.get_name()
+        
+        self.hp = randint(25,50)
+        self.power = randint(1,3)
 
         Pokemon.pokemons[pokemon_trainer] = self
 
@@ -34,10 +37,21 @@ class Pokemon:
         else:
             return "Pikachu"
 
+    def attack(self, enemy):
+        if isinstance(enemy, Wizard): # Проверка на то, что enemy является типом данных Wizard (является экземпляром класса Волшебник)
+            chance = randint(1,5)
+            if chance == 1:
+                return "Покемон-волшебник применил щит в сражении"
+        if enemy.hp > self.power:
+            enemy.hp -= self.power
+            return f"Сражение @{self.pokemon_trainer} с @{enemy.pokemon_trainer}"
+        else:
+            enemy.hp = 0
+            return f"Победа @{self.pokemon_trainer} над @{enemy.pokemon_trainer}! "
 
     # Метод класса для получения информации
     def info(self):
-        return f"Имя твоего покеомона: {self.name}"
+        return f"Имя твоего покеомона: {self.name}, сила - {self.power}, здоровье{self.hp}"
 
     # Метод класса для получения картинки покемона
     def show_img(self):
